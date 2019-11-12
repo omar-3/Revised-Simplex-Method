@@ -2,6 +2,32 @@
 from array import *
 from shutil import get_terminal_size
 
+
+
+# Author: Omar Khaled 11/11/2019
+# Usage: - be sure python3.7 is in your PATH
+#        - make it executable         
+#          chmod 777 rms.py
+#        - run it
+#        - follow the script prompts, but anyways 
+#           
+#           1- Enter the number of constraints      t
+#           2- Enter the number of variable
+#           3- Enter the coeffiecients of the objective function     ==> MUST be maximization problem, if not multiply by negative 
+#                                                                        I hardcoded that in the code because I suck :"D 
+#                                                                        you can change it and make a pull request, hint: edit how the Eta matrix is built
+#
+#           4- Enter the coeffiecient of the constraints             ==> MUST be in the standard form for LPPs which are solvable by the simplex method;
+#                                                                       * The constraints equations are less than their Bs, or equal ... so multiply by negative if no
+#           5- iterate ;)
+#         
+
+
+
+
+
+
+
 def printCenterTerminal(s):
     terminal_width, _ = get_terminal_size()
     columns = get_terminal_size().columns
@@ -9,18 +35,11 @@ def printCenterTerminal(s):
     print(s.center(columns))
     print("-" *terminal_width)
 
-
-
-#tolerances
-epsilon1 = 0.00001
-epsilon2 = 0.000001
-
 #constraints number
 m = None
 
 #variables number
 n = None
-
 
 # Variables objects
 class variable:
@@ -29,8 +48,7 @@ class variable:
         self.value = value
     def __lt__(self, other):
         return self.value < other.value
-    def __gt__(self, other):
-        return self.value > other.value
+
 
 # that is the column that is different from the identity matrix,
 # we need it to change the basis matrix
@@ -44,7 +62,7 @@ class Eta:
 #________________________________________________________________________________________________#
 #________________________________________________________________________________________________#
 #                               These are functions just for printing                            #
-#                               All the algorithm logic is in the __main__                       #
+#                               All the algorithm logic is in the main()                         #
 #________________________________________________________________________________________________#
 #________________________________________________________________________________________________#
 def matrixPrint( r , c, matrix=[]):
@@ -303,7 +321,7 @@ def main():
             print("x",end="")
             print(varLabel+1,end=" ")
             print(cnbar,end="\t")
-            if cnbar > epsilon1:       #===> I'm not 100% clear on why we compare with cnbar, but it seems to make the algorithm work ;)
+            if cnbar > 0.00001:       #===> I'm not 100% clear on why we compare with cnbar, but it seems to make the algorithm work ;) please refer to the report I tried to explain it
                 v = variable(varLabel,cnbar)
                 cnbars.append(v)
                 if cnbar > largestCoeff:
@@ -328,7 +346,7 @@ def main():
         leavingRow = 0
         smallest_t = 0.0
 
-        #now we are trying to get into the REAL algorithm
+        #now we are getting into the REAL algorithm
 
         while True:
             leavingLabel = -1
@@ -387,7 +405,7 @@ def main():
             print("ratio: ",end="")
 
             #okay now we are at the position like in the simplex method and we need
-            # to choose the smallest ratio to kick out the row
+            # to choose the smallest ratio to kick out the corresponding row
 
 
             for row in range(len(d)):
@@ -406,7 +424,7 @@ def main():
                     leavingRow = row
                     smallest_t = t_row
             
-            if d[leavingRow] > epsilon2:    #this thing is real annoying
+            if d[leavingRow] > 0.000001:    #fml
                 print("\nThe variable leaving is x",end="")
                 print(leavingLabel+1)
                 break
@@ -422,7 +440,6 @@ def main():
         #___________________________________________________
         #___________________________________________________
 
-        #some little boilerplate
 
         enteringVar = variable(enteringLabel,smallest_t)
         b[leavingRow] = enteringVar
