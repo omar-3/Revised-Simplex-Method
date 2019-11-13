@@ -183,16 +183,16 @@ def main():
     global m
     global n
 
-    m = int(input("Enter the number of constraints"))
+    m = int(input("Enter the number of constraints:  "))
  
     
-    n = int(input("Enter the number of variables"))
+    n = int(input("Enter the number of variables:  "))
 
 
     objectiveFunction = [0]*(m+n)
 
     for col in range(n):
-        objectiveFunction[col] = float(input(f"Enter the coefficient {col+1} of the objective function"))
+        objectiveFunction[col] = float(input(f"Enter the coefficient {col+1} of the objective function:  "))
     
     #### pad the rest of the "costs" of the objective function to zeros ==> the non basic variables costs
 
@@ -220,12 +220,12 @@ def main():
     for row in range(m):
         for col in range(n+1):
             if col == n:
-                bRow = float(input("Enter the (b) value of this constraint"))
+                bRow = float(input("Enter the (b) value of this constraint:  "))
                 x = n + row
                 bVar = variable(x,bRow)
                 b[row] = bVar
             else:
-                A[row*(m+n)+col] = float(input(f"Enter the coeffiecient of the {col+1} variable in the constraint  {row+1}"))
+                A[row*(m+n)+col] = float(input(f"Enter the coeffiecient of the {col+1} variable in the constraint  {row+1}:  "))
 
     for row in range(m):
         base = (m+n)*row+n
