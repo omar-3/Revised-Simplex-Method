@@ -1,5 +1,4 @@
 #!/usr/bin/python3.7
-from array import *
 from shutil import get_terminal_size
 
 
