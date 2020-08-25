@@ -1,4 +1,5 @@
 #!/usr/bin/python3.7
+from array import *
 from shutil import get_terminal_size
 
 
@@ -18,8 +19,8 @@ from shutil import get_terminal_size
 #
 #           4- Enter the coeffiecient of the constraints             ==> MUST be in the standard form for LPPs which are solvable by the simplex method;
 #                                                                       * The constraints equations are less than their Bs, or equal ... so multiply by negative if no
-#           5- iterate ;)
-#         
+#           5- iterate through every point 
+         
 
 
 
@@ -330,7 +331,7 @@ def main():
         print()
 
         if len(cnbars) == 0:
-            print(f"There is no entering values in the next iteration so the optimal point is {z}")
+            print("There is no entering values in the next iteration so the optimal point is {z}")
             finalvariablePrint(b=b,nonbasic=nonbasic)
             return
         else:
