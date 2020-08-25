@@ -331,7 +331,7 @@ def main():
         print()
 
         if len(cnbars) == 0:
-            print("There is no entering values in the next iteration so the optimal point is {z}")
+            print(f"There is no entering values in the next iteration so the optimal point is {z}")
             finalvariablePrint(b=b,nonbasic=nonbasic)
             return
         else:
